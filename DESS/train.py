@@ -26,6 +26,7 @@ tf.app.flags.DEFINE_integer('filters_in_last', 128, 'Number of filters on the la
 tf.app.flags.DEFINE_string('file_path', '/gpfs/data/denizlab/Users/hrr288/Radiology_test/', 'Main Folder to Save outputs')
 tf.app.flags.DEFINE_integer('val_fold', 1, 'Fold fo cross-validation')
 tf.app.flags.DEFINE_string('file_folder','/gpfs/data/denizlab/Datasets/OAI/SAG_3D_DESS/', 'Path to HDF5 radiographs')
+tf.app.flags.DEFINE_string('csv_path', '/gpfs/data/denizlab/Users/hrr288/Tianyu_dat/TestSets/', 'Folder with the fold splits')
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -42,10 +43,10 @@ class roc_callback(Callback):
               'randomFlip' : False,
               'flipProbability' : -1,
               'cropDim' : (352,352,144)}
-        self.x = DataGenerator(directory = '/gpfs/data/denizlab/Users/hrr288/Tianyu_dat/TestSets/Fold_'+str(val_fold)+'/CV_'+str(index)+'_train.csv',file_folder=FLAGS.file_folder,   **_params)
-        self.x_val = DataGenerator(directory = '/gpfs/data/denizlab/Users/hrr288/Tianyu_dat/TestSets/Fold_'+str(val_fold)+'/CV_'+str(index)+'_val.csv',file_folder=FLAGS.file_folder,   **_params)
-        self.y = pd.read_csv('/gpfs/data/denizlab/Users/hrr288/Tianyu_dat/TestSets/Fold_'+str(val_fold)+'/CV_'+str(index)+'_train.csv').Label
-        self.y_val = pd.read_csv('/gpfs/data/denizlab/Users/hrr288/Tianyu_dat/TestSets/Fold_'+str(val_fold)+'/CV_'+str(index)+'_val.csv').Label
+        self.x = DataGenerator(directory = FLAGS.csv_path+'Fold_'+str(val_fold)+'/CV_'+str(index)+'_train.csv',file_folder=FLAGS.file_folder,   **_params)
+        self.x_val = DataGenerator(directory = FLAGS.csv_path+'Fold_'+str(val_fold)+'/CV_'+str(index)+'_val.csv',file_folder=FLAGS.file_folder,   **_params)
+        self.y = pd.read_csv(FLAGS.csv_path+'Fold_'+str(val_fold)+'/CV_'+str(index)+'_train.csv').Label
+        self.y_val = pd.read_csv(FLAGS.csv_path+'Fold_'+str(val_fold)+'/CV_'+str(index)+'_val.csv').Label
         self.auc = []
         self.val_auc = []
         self.losses = []
@@ -232,8 +233,8 @@ def cross_validation(val_fold, lr, filters_in_last, file_path):
         if not os.path.exists(fold_path):
             os.makedirs(fold_path)    
         
-        training_generator = DataGenerator(directory = '/gpfs/data/denizlab/Users/hrr288/Tianyu_dat/TestSets/Fold_'+str(val_fold)+'/CV_'+str(i+1)+'_train.csv',file_folder=FLAGS.file_folder,   **train_params)
-        validation_generator = DataGenerator(directory = '/gpfs/data/denizlab/Users/hrr288/Tianyu_dat/TestSets/Fold_'+str(val_fold)+'/CV_'+str(i+1)+'_val.csv',file_folder=FLAGS.file_folder,   **val_params)
+        training_generator = DataGenerator(directory = FLAGS.csv_path+'Fold_'+str(val_fold)+'/CV_'+str(i+1)+'_train.csv',file_folder=FLAGS.file_folder,   **train_params)
+        validation_generator = DataGenerator(directory = FLAGS.csv_path+'Fold_'+str(val_fold)+'/CV_'+str(i+1)+'_val.csv',file_folder=FLAGS.file_folder,   **val_params)
         
         train_model(model=model, 
                     train_data = training_generator,
