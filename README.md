@@ -1,4 +1,4 @@
-# OAI_MRI_train
+# OAI-MRI-TKR
 
 ## DESS training/evaluation
 
