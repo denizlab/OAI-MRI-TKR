@@ -1,0 +1,32 @@
+name: tkr_mri_env
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.6.8
+  - cudatoolkit=10.1
+  - cudnn=7.5
+  - tensorflow-gpu=1.13.1
+  - keras=2.1.6
+  - pytorch=1.0.1
+  - torchvision=0.2.1
+  - numpy=1.14.5
+  - scipy=1.1.0
+  - pandas=0.24.2
+  - scikit-learn=0.19.1
+  - scikit-image=0.13.1
+  - matplotlib=3.0.3
+  - opencv=3.4.2
+  - h5py=2.8.0
+  - pillow=5.3.0
+  - ipykernel=5.1.0
+  - jupyter=1.0.0
+  - pip
+  - pip:
+    - nibabel==2.4.0
+    - pydicom==1.2.2
+    - simpleitk==1.2.0
+    - tensorboardx==1.6
+    - albumentations==0.5.2
+    - nilearn==0.6.2
