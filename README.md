@@ -250,3 +250,16 @@ Key findings from our results:
 ## Citation
 If you use this code in your research, please cite our paper:
 [https://www.nature.com/articles/s41598-023-33934-1](https://www.nature.com/articles/s41598-023-33934-1)
+
+```bibtex
+@article{rajamohan2023prediction,
+   title={Prediction of total knee replacement using deep learning analysis of knee MRI},
+   author={Rajamohan, Haresh Rengaraj and Wang, Tianyu and Leung, Kevin and Chang, Gregory and Cho, Kyunghyun and Kijowski, Richard and Deniz, Cem M},
+   journal={Scientific reports},
+   volume={13},
+   number={1},
+   pages={6922},
+   year={2023},
+   publisher={Nature Publishing Group UK London}
+}
+```
